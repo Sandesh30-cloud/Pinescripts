@@ -1,0 +1,8 @@
+//@version=5
+indicator("Simple Moving Average", overlay=true)
+
+// calculate SMA
+sma20 = ta.sma(close, 20)
+
+// plot on chart
+plot(sma20, color=color.blue, linewidth=2)
