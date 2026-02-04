@@ -1,0 +1,8 @@
+//@version=5
+indicator("EMA Indicator", overlay=true)
+
+ema50 = ta.ema(close, 50)
+ema200 = ta.ema(close, 200)
+
+plot(ema50, color=color.orange, linewidth=2)
+plot(ema200, color=color.blue, linewidth=2)
