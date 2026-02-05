@@ -8,7 +8,6 @@ atrVal = ta.atr(14)
 
 htfEma = request.security(syminfo.tickerid, "60", ta.ema(close, 200))
 htfBull = close > htfEma
-
 longEntry = emaFast > emaSlow and htfBull and close < emaFast and close > emaFast - atrVal and ta.crossover(rsiVal, 45) and close > open
 
 if longEntry
