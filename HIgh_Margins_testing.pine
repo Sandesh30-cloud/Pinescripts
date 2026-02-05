@@ -1,0 +1,21 @@
+//@version=5
+strategy("High Margin Pro", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+emaFast = ta.ema(close, 50)
+emaSlow = ta.ema(close, 200)
+rsiVal = ta.rsi(close, 14)
+atrVal = ta.atr(14)
+
+htfEma = request.security(syminfo.tickerid, "60", ta.ema(close, 200))
+htfBull = close > htfEma
+
+longEntry = emaFast > emaSlow and htfBull and close < emaFast and close > emaFast - atrVal and ta.crossover(rsiVal, 45) and close > open
+
+if longEntry
+    strategy.entry("LONG", strategy.long)
+
+strategy.exit("EXIT", "LONG", stop = close - 1.5 * atrVal, limit = close + 3.5 * atrVal)
+
+plot(emaFast, color=color.orange)
+plot(emaSlow, color=color.blue)
+plot(htfEma, color=color.purple)
